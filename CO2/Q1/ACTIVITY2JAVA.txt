@@ -1,4 +1,4 @@
-package com.example.sharedpreference;
+package com.example.sp;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -10,39 +10,32 @@ import android.view.View;
 import android.widget.EditText;
 import android.widget.Toast;
 
-public class ActivityB extends AppCompatActivity {
-    public static final String DEFAULT="No Value Entered";
-    EditText ed1,ed2;
-
+public class MainActivity2 extends AppCompatActivity {
+    public static final String Default = "No values entered";
+    EditText username,password;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activitymain2);
-
-        ed1=(EditText) findViewById(R.id.T3);
-        ed2=(EditText) findViewById(R.id.T4);
-
-
+        setContentView(R.layout.activity_main2);
+        username = (EditText) findViewById(R.id.username);
+        password = (EditText) findViewById(R.id.password);
     }
-    public void Load(View view){
-        SharedPreferences sp=getSharedPreferences("Data", Context.MODE_PRIVATE);
-        String user=sp.getString("username",DEFAULT);
-        String pass=sp.getString("password",DEFAULT);
-        if (user.equals(DEFAULT) || pass.equals(DEFAULT)) {
-            Toast.makeText(this, "Data Not Found", Toast.LENGTH_SHORT).show();
+    public void load(View view){
+        SharedPreferences sp = getSharedPreferences("MyData", Context.MODE_PRIVATE);
+        String user = sp.getString("name","Default");
+        String pass = sp.getString("password","Default");
+        if(user.equals(Default) || pass.equals(Default)){
+            Toast.makeText(this, "No data found", Toast.LENGTH_SHORT).show();
         }
-        else {
-            ed1.setText(user);
-            ed2.setText(pass);
-            Toast.makeText(this, "Data Retrieved", Toast.LENGTH_SHORT).show();
+        else{
+            username.setText(user);
+            password.setText(pass);
+            Toast.makeText(this, "Data Found", Toast.LENGTH_SHORT).show();
         }
     }
-
-    public void Prev(View view) {
-
-        Toast.makeText(this, "First Page", Toast.LENGTH_SHORT).show();
-        Intent in=new Intent(this,MainActivity.class);
+    public void prev(View view){
+        Toast.makeText(this, "Previous", Toast.LENGTH_SHORT).show();
+        Intent in = new Intent(this,MainActivity.class);
         startActivity(in);
-
     }
 }
